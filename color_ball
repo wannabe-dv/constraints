@@ -1,0 +1,36 @@
+class color;
+  
+  typedef enum {RED, ORANGE, BLACK, BLUE, PURPLE, YELLOW, GREEN, BROWN} color_e;
+  
+  rand color_e ball;
+  
+  color_e ball_q [$];
+  
+  constraint ball_c {
+    !(ball inside {ball_q});
+  }
+  
+  function void post_randomize();
+    if (ball_q.size()) begin
+      ball_q = {ball_q[1:$], ball};
+    end else begin
+      ball_q = '{3{ball}};
+    end
+  endfunction : post_randomize
+  
+endclass : color
+
+module tb;
+  
+  color c;
+  
+  initial begin
+    c = new();
+    
+    repeat(15) begin
+    	c.randomize();
+    	$display(c.ball.name());
+    end
+    
+  end
+endmodule : tb
