@@ -1,0 +1,9 @@
+1. <constraint name>.constraint_mode(0) -> disable constraint
+2. <constraint name>.constraint_mode(1) -> enable constraint
+3. constraint with same name in the derived class overrides the constraint in the base class
+4. The initial specifier, preceded by a colon, when applied to constraints, specifies that the constraint shall not be an override.
+5. The final specifier, when applied to constraints, specifies that no further replacements of the constraint shall be allowed.
+6. function void object.rand_mode(bit on_off) 
+7. function int object.random_variable.rand_mode()
+8. function void object.constraint_mode(bit on_off)
+9. function int object.constraint_block.constraint_mode()
