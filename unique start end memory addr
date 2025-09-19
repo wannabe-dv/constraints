@@ -1,0 +1,39 @@
+// Code your testbench here
+// or browse Examples
+class memory_range;
+  rand int start_addr[10];
+  rand int end_addr[10];
+
+  constraint addr_c {
+    foreach(start_addr[i]) {
+      foreach(start_addr[j]) {
+        i != j -> !(start_addr[i] inside {[start_addr[j]:end_addr[j]]});
+        i != j -> !(end_addr[i] inside {[start_addr[j]:end_addr[j]]});
+      }
+    }
+  }
+  
+  constraint start_addr_range_c {
+    foreach(start_addr[i]) {
+      start_addr[i] inside {[0:1000]};      
+      start_addr[i] < end_addr[i];
+    }
+  }
+        
+  constraint end_addr_range_c {
+    foreach(end_addr[i]) end_addr[i] inside {[1:1000]};
+  }
+   
+endclass : memory_range
+
+module tb;
+  memory_range m;
+  
+  initial begin
+    m = new;
+    
+    m.randomize();
+    $display("%p",m.start_addr);
+    $display("%p",m.end_addr);
+  end
+endmodule
